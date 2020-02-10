@@ -30,7 +30,7 @@ services:
     entrypoint: client_linux_amd64
     command:
       --localaddr :12948
-      --remoteaddr ${server}:29900
+      --remoteaddr ${IP}:29900
       --crypt aes
       --mode fast3
     ports:
