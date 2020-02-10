@@ -10,7 +10,7 @@ services:
       - PASSWORD=9MLSpPmNt
     restart: always
 
-  kcptunserver:
+  kcptun-server:
     image: vimagick/kcptun
     command:
       --listen :29900
@@ -25,7 +25,7 @@ services:
       - KCPTUN_KEY = "VVqwMf+qDtulHJC7dPR/dPsCW8SYAeCFaP0TMWFNiLg="
     restart: always
 
-  client:
+  kcptun-client:
     image: vimagick/kcptun
     entrypoint: client_linux_amd64
     command:
