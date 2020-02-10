@@ -1,7 +1,7 @@
 version: '3.5'
 
 services:
-  ss:
+  shadowsocks:
     image: shadowsocks/shadowsocks-libev
     ports:
       - "8388:8388"
@@ -10,7 +10,7 @@ services:
       - PASSWORD=9MLSpPmNt
     restart: always
 
-  ks:
+  kcptun-server:
     image: vimagick/kcptun
     command:
       --listen :29900
@@ -22,10 +22,10 @@ services:
     ports:
     - "29900:29900/udp"
     environment:
-      - KCPTUN_KEY = "VVqwMf+qDtulHJC7dPR/dPsCW8SYAeCFaP0TMWFNiLg="
+      - KCPTUN_KEY="VVqwMf+qDtulHJC7dPR/dPsCW8SYAeCFaP0TMWFNiLg="
     restart: always
 
-  kc:
+  kcptun-client:
     image: vimagick/kcptun
     entrypoint: client_linux_amd64
     command:
@@ -36,5 +36,5 @@ services:
     ports:
       - "12948:12948/tcp"
     environment:
-      - KCPTUN_KEY = "VVqwMf+qDtulHJC7dPR/dPsCW8SYAeCFaP0TMWFNiLg="
+      - KCPTUN_KEY="VVqwMf+qDtulHJC7dPR/dPsCW8SYAeCFaP0TMWFNiLg="
     restart: always
