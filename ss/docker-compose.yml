@@ -10,17 +10,31 @@ services:
       - PASSWORD=9MLSpPmNt
     restart: always
 
-  kcptun:
+  kcptunserver:
     image: vimagick/kcptun
     command:
       --listen :29900
       --target shadowsocks:8388
       --crypt aes
-      --mode fast
+      --mode fast3
     depends_on:
       - shadowsocks
     ports:
     - "29900:29900/udp"
+    environment:
+      - KCPTUN_KEY = "VVqwMf+qDtulHJC7dPR/dPsCW8SYAeCFaP0TMWFNiLg="
+    restart: always
+
+  client:
+    image: vimagick/kcptun
+    entrypoint: client_linux_amd64
+    command:
+      --localaddr :12948
+      --remoteaddr ${server}:29900
+      --crypt aes
+      --mode fast3
+    ports:
+      - "12948:12948/tcp"
     environment:
       - KCPTUN_KEY = "VVqwMf+qDtulHJC7dPR/dPsCW8SYAeCFaP0TMWFNiLg="
     restart: always
